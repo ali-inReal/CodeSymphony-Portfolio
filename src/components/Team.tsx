@@ -52,7 +52,7 @@ const Team: React.FC = () => {
       role: 'Associate Software Engineer',
       image: 'public/mohib.jpg',
       bio: 'Dedicated associate software engineer with a passion for backend development and system architecture. Focuses on building efficient APIs, database optimization, and server-side solutions using modern technologies and best practices.',
-      socials: { linkedin: '#' }
+      socials: { linkedin: 'https://www.linkedin.com/in/mian-mohib-b18726211/' }
     }
     
   ];
