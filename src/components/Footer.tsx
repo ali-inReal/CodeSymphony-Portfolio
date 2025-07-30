@@ -94,9 +94,6 @@ const Footer: React.FC = () => {
           <p className="text-gray-400 text-sm">
             © 2025 CodeSymphony Inc. All rights reserved.
           </p>
-          <p className="text-gray-400 text-sm mt-4 md:mt-0">
-            Built with ❤️ and cutting-edge technology
-          </p>
         </div>
       </div>
     </footer>
