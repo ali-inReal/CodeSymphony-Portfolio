@@ -79,9 +79,7 @@ const Team: React.FC = () => {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className={`w-32 h-32 rounded-full mx-auto object-cover object-top group-hover:scale-110 transition-transform duration-300 ring-4 ring-gray-100 ${
-                    member.name === 'Syed Jarar Haider' ? '-mt-4' : ''
-                  }`}
+                  className="w-32 h-32 rounded-full mx-auto object-cover object-top group-hover:scale-110 transition-transform duration-300 ring-4 ring-gray-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-teal-600/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
