@@ -7,7 +7,7 @@ const Team: React.FC = () => {
       name: 'Muhammad Ali',
       role: 'Chief Executive Officer',
       image: 'public/mali.jpg',
-      bio: 'Visionary technology leader with 3+ years of experience in enterprise software development, digital transformation, and strategic business growth. Passionate about leveraging cutting-edge technology to solve complex business challenges and drive innovation.',
+      bio: 'Visionary technology leader with experience in enterprise software development, digital transformation, and strategic business growth. Passionate about leveraging cutting-edge technology to solve complex business challenges.',
       socials: { linkedin: 'https://www.linkedin.com/in/muhammadali2418/' }
     },
     {
