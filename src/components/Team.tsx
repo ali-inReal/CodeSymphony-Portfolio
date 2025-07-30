@@ -15,7 +15,7 @@ const Team: React.FC = () => {
       role: 'Software Engineer',
       image: 'public/touseef.jpg',
       bio: 'Experienced software engineer with expertise in full-stack development and modern web technologies. Specializes in building scalable applications using React, Node.js.',
-      socials: { linkedin: '#'}
+      socials: { linkedin: 'https://www.linkedin.com/in/real-touseef/'}
     },
     {
       name: 'Muhammad Talha Khan',
