@@ -44,7 +44,7 @@ const Team: React.FC = () => {
       role: 'Associate Software Engineer',
       image: 'public/profile.jpg',
       bio: 'Emerging software engineer with a strong foundation in modern web development technologies. Eager to contribute to innovative projects while continuously learning and growing in full-stack development and software engineering best practices.',
-      socials: { linkedin: '#' }
+      socials: { linkedin: 'https://www.linkedin.com/in/ashfaq-hammad' }
     },
 
     {
