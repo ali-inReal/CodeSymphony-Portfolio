@@ -30,7 +30,7 @@ const Team: React.FC = () => {
       role: 'Software Engineer',
       image: 'public/jerry.jpg',
       bio: 'Skilled software engineer with expertise in full-stack development and modern web technologies. Focuses on creating robust applications using React and Node.js.',
-      socials: { linkedin: '#' }
+      socials: { linkedin: 'https://www.linkedin.com/in/syed-jarrar-haider-sherazi/' }
     },
     {
       name: 'Hassan Bilal Butt',
