@@ -37,7 +37,7 @@ const Team: React.FC = () => {
       role: 'Software Engineer',
       image: 'public/hassan.jpg',
       bio: 'Talented software engineer specializing in frontend development with deep expertise in React, TypeScript, and modern web technologies. Passionate about creating intuitive user interfaces and seamless user experiences.',
-      socials: { linkedin: '#' }
+      socials: { linkedin: 'https://www.linkedin.com/in/hassanbilalbutt/' }
     },
     {
       name: 'Hammad Ashfaq',
