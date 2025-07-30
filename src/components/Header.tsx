@@ -30,11 +30,11 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-2">
             <img 
               src="/companylogo.jpg" 
-              alt="CodeSymphony Inc Logo" 
+              alt="CodeSymphony Logo" 
               className="w-10 h-10 rounded-lg object-cover"
             />
             <span className={`text-xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-              CodeSymphony Inc
+              CodeSymphony
             </span>
           </div>
 

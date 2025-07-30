@@ -43,10 +43,10 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-2 mb-4">
               <img 
                 src="/companylogo.jpg" 
-                alt="CodeSymphony Inc Logo" 
+                alt="CodeSymphony Logo" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
-              <span className="text-xl font-bold">CodeSymphony Inc</span>
+              <span className="text-xl font-bold">CodeSymphony</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Delivering digital excellence through innovative software solutions. 
@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
 
         <div className="text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 CodeSymphony Inc. All rights reserved.
+            © 2025 CodeSymphony. All rights reserved.
           </p>
         </div>
       </div>
