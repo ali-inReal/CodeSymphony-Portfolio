@@ -8,7 +8,7 @@ const Team: React.FC = () => {
       role: 'Chief Executive Officer',
       image: 'public/mali.jpg',
       bio: 'Visionary technology leader with 3+ years of experience in enterprise software development, digital transformation, and strategic business growth. Passionate about leveraging cutting-edge technology to solve complex business challenges.',
-      socials: { linkedin: '#' }
+      socials: { linkedin: 'https://www.linkedin.com/in/muhammadali2418/' }
     },
     {
       name: 'Muhammad Touseef',
@@ -100,6 +100,8 @@ const Team: React.FC = () => {
                 <div className="flex justify-center space-x-3">
                   <a
                     href={member.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-600 transition-colors"
                   >
                     <Linkedin className="w-5 h-5" />
