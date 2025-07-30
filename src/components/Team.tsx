@@ -7,21 +7,21 @@ const Team: React.FC = () => {
       name: 'Muhammad Ali',
       role: 'Chief Executive Officer',
       image: 'public/mali.jpg',
-      bio: 'Visionary technology leader with 3+ years of experience in enterprise software development, digital transformation, and strategic business growth. Passionate about leveraging cutting-edge technology to solve complex business challenges.',
+      bio: 'Visionary technology leader with 3+ years of experience in enterprise software development, digital transformation, and strategic business growth. Passionate about leveraging cutting-edge technology to solve complex business challenges and drive innovation.',
       socials: { linkedin: 'https://www.linkedin.com/in/muhammadali2418/' }
     },
     {
       name: 'Muhammad Touseef',
       role: 'Software Engineer',
       image: 'public/touseef.jpg',
-      bio: 'Experienced software engineer with expertise in full-stack development and modern web technologies. Specializes in building scalable applications using React, Node.js.',
+      bio: 'Experienced software engineer with expertise in full-stack development and modern web technologies. Specializes in building scalable applications using React and Node.js.',
       socials: { linkedin: 'https://www.linkedin.com/in/real-touseef/'}
     },
     {
       name: 'Muhammad Talha Khan',
       role: 'Software Engineer',
       image: 'public/final.jpg',
-      bio: 'Versatile software engineer with a strong background in full-stack development and cloud technologies. Excels at architecting scalable solutions and implementing robust backend systems with expertise in microservices and API development.',
+      bio: 'Versatile software engineer with expertise in full-stack development and cloud technologies. Excels at architecting scalable solutions and implementing robust systems.',
       socials: { linkedin: 'https://www.linkedin.com/in/ammuhammadtalha/'}
     },
     
@@ -29,21 +29,21 @@ const Team: React.FC = () => {
       name: 'Syed Jarar Haider',
       role: 'Software Engineer',
       image: 'public/jerry.jpg',
-      bio: 'Skilled software engineer with expertise in full-stack development and cutting-edge web technologies. Focuses on creating robust applications using React, Node.js, and modern frameworks.',
+      bio: 'Skilled software engineer with expertise in full-stack development and modern web technologies. Focuses on creating robust applications using React and Node.js.',
       socials: { linkedin: '#' }
     },
     {
       name: 'Hassan Bilal Butt',
       role: 'Software Engineer',
       image: 'public/hassan.jpg',
-      bio: 'Talented software engineer specializing in frontend development with deep expertise in React, TypeScript, and modern web technologies. Passionate about creating intuitive user interfaces and seamless user experiences.',
+      bio: 'Talented software engineer specializing in frontend development with expertise in React and TypeScript. Passionate about creating intuitive user interfaces.',
       socials: { linkedin: 'https://www.linkedin.com/in/hassanbilalbutt/' }
     },
     {
       name: 'Hammad Ashfaq',
       role: 'Associate Software Engineer',
       image: 'public/profile.jpg',
-      bio: 'Emerging software engineer with a strong foundation in modern web development technologies. Eager to contribute to innovative projects while continuously learning and growing in full-stack development and software engineering best practices.',
+      bio: 'Emerging software engineer with a strong foundation in modern web development technologies. Eager to contribute to innovative projects and grow in full-stack development.',
       socials: { linkedin: 'https://www.linkedin.com/in/ashfaq-hammad' }
     },
 
@@ -51,7 +51,7 @@ const Team: React.FC = () => {
       name: 'Mohib Ali',
       role: 'Associate Software Engineer',
       image: 'public/mohib.jpg',
-      bio: 'Dedicated associate software engineer with a passion for backend development and system architecture. Focuses on building efficient APIs, database optimization, and server-side solutions using modern technologies and best practices.',
+      bio: 'Dedicated associate software engineer with a passion for backend development and system architecture. Focuses on building efficient APIs and server-side solutions.',
       socials: { linkedin: 'https://www.linkedin.com/in/mian-mohib-b18726211/' }
     }
     
