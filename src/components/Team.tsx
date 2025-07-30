@@ -22,7 +22,7 @@ const Team: React.FC = () => {
       role: 'Software Engineer',
       image: 'public/final.jpg',
       bio: 'Versatile software engineer with a strong background in full-stack development and cloud technologies. Excels at architecting scalable solutions and implementing robust backend systems with expertise in microservices and API development.',
-      socials: { linkedin: '#'}
+      socials: { linkedin: 'https://www.linkedin.com/in/ammuhammadtalha/'}
     },
     
     {
