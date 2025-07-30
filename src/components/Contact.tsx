@@ -216,13 +216,6 @@ const Contact: React.FC = () => {
               ))}
             </div>
 
-            {/* Call to Action */}
-            <div className="bg-gradient-to-r from-blue-600 to-teal-600 text-white p-6 rounded-xl">
-              <h4 className="text-xl font-bold mb-2">Ready to Get Started?</h4>
-              <p className="text-blue-100 mb-4">
-                Let's schedule a free consultation to discuss your project and explore how we can help.
-              </p>
-            </div>
           </div>
         </div>
       </div>
