@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
 
         <hr className="border-gray-800 my-8" />
 
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="text-center">
           <p className="text-gray-400 text-sm">
             © 2025 CodeSymphony Inc. All rights reserved.
           </p>
