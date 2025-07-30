@@ -12,7 +12,6 @@ const Footer: React.FC = () => {
   const socialLinks = [
     { icon: Github, href: '#', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/company/codesymphony-inc/about/', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
     { icon: Mail, href: 'mailto:admin@codesymphony.tech', label: 'Email' }
   ];
 
