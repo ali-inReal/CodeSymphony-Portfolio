@@ -58,7 +58,7 @@ const MethodologyPulse = ({ index, total }: { index: number, total: number }) =>
   const smoothPulseSpeed = useSpring(pulseSpeed, { stiffness: 100, damping: 30 });
   const [offset, setOffset] = React.useState(0);
 
-  useAnimationFrame((time, delta) => {
+  useAnimationFrame((_, delta) => {
     const speedFactor = smoothPulseSpeed.get();
     setOffset(prev => (prev + (delta * 0.05 * speedFactor)) % 200);
   });

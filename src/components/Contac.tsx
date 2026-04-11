@@ -1,9 +1,14 @@
+
 import React, { useState } from "react";
 import "../App.css";
+import emailjs from "emailjs-com";
+
 
 const Contac: React.FC = () => {
 	const [form, setForm] = useState({ name: "", email: "", message: "" });
 	const [submitted, setSubmitted] = useState(false);
+	const [sending, setSending] = useState(false);
+	const [error, setError] = useState("");
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
@@ -11,12 +16,35 @@ const Contac: React.FC = () => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		setSubmitted(true);
-		// Here you would typically handle sending the form data
+		setSending(true);
+		setError("");
+
+		// EmailJS config
+		const serviceID = "service_default"; // Replace with your EmailJS service ID
+		const templateID = "template_default"; // Replace with your EmailJS template ID
+		const userID = "user_default"; // Replace with your EmailJS user/public key
+
+		const templateParams = {
+			from_name: form.name,
+			from_email: form.email,
+			message: form.message,
+			to_email: "alim07922@gmail.com"
+		};
+
+		emailjs.send(serviceID, templateID, templateParams, userID)
+			.then(() => {
+				setSubmitted(true);
+				setSending(false);
+				setForm({ name: "", email: "", message: "" });
+			})
+			.catch(() => {
+				setError("Failed to send message. Please try again later.");
+				setSending(false);
+			});
 	};
 
 	return (
-		<div className="contact-page">
+		<div id="contact" className="contact-page">
 			<h2>Contact Us</h2>
 			{submitted ? (
 				<p>Thank you for reaching out! We'll get back to you soon.</p>
@@ -34,12 +62,13 @@ const Contac: React.FC = () => {
 						Message:
 						<textarea name="message" value={form.message} onChange={handleChange} required />
 					</label>
-					<button type="submit">Send</button>
+					<button type="submit" disabled={sending}>{sending ? "Sending..." : "Send"}</button>
+					{error && <p style={{ color: "red" }}>{error}</p>}
 				</form>
 			)}
 			<div className="contact-socials contact-socials-bottom">
 				<a
-					href="https://wa.me/your-number"
+					href="https://wa.me/+923092693382"
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label="WhatsApp"
@@ -51,7 +80,7 @@ const Contac: React.FC = () => {
 					</svg>
 				</a><br />
 				<a
-					href="https://linkedin.com/in/your-profile"
+					href="https://www.linkedin.com/company/codesymphony-inc/"
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label="LinkedIn"

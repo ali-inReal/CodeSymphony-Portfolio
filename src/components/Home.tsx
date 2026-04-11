@@ -69,7 +69,15 @@ const Home: React.FC = () => {
 
           <div>
             <MagneticWrapper strength={15}>
-              <button className="bg-white text-black px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-accent hover:text-white transition-all duration-300 shadow-lg shadow-white/5 cursor-pointer">
+              <button
+                className="bg-white text-black px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-accent hover:text-white transition-all duration-300 shadow-lg shadow-white/5 cursor-pointer"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
                 <span className="flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 10.5V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2v-4.5M16 3v4M8 3v4"/></svg>
                   Contact
@@ -123,12 +131,28 @@ const Home: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
           <MagneticWrapper strength={40}>
-            <button className="group relative px-12 py-5 bg-white text-black font-black text-sm uppercase tracking-widest rounded-xl overflow-hidden transition-all duration-300 hover:bg-accent hover:text-white hover:shadow-[0_0_50px_rgba(0,229,255,0.4)] cursor-pointer">
+            <button
+              className="group relative px-12 py-5 bg-white text-black font-black text-sm uppercase tracking-widest rounded-xl overflow-hidden transition-all duration-300 hover:bg-accent hover:text-white hover:shadow-[0_0_50px_rgba(0,229,255,0.4)] cursor-pointer"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Start Your Journey
             </button>
           </MagneticWrapper>
           <MagneticWrapper strength={30}>
-            <button className="group px-12 py-5 border border-white/10 rounded-xl font-black text-sm uppercase tracking-widest backdrop-blur-3xl transition-all duration-300 hover:border-white/40 flex items-center gap-3 cursor-pointer">
+            <button
+              className="group px-12 py-5 border border-white/10 rounded-xl font-black text-sm uppercase tracking-widest backdrop-blur-3xl transition-all duration-300 hover:border-white/40 flex items-center gap-3 cursor-pointer"
+              onClick={() => {
+                const projectSection = document.getElementById('portfolio');
+                if (projectSection) {
+                  projectSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               View Work
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
