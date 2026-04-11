@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap');
+
+:root {
+  --accent-blue: #00E5FF;
+  --deep-charcoal: #121212;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --font-heading: "Outfit", sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Z-Space specific variables */
+  --z-glow-color: 0, 229, 255;
+  --z-edge-color: 18, 18, 18;
+}
+
+body {
+  margin: 0;
+  background-color: var(--deep-charcoal);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+@theme {
+  --color-accent: var(--accent-blue);
+  --color-charcoal: var(--deep-charcoal);
+  --color-glass-border: var(--glass-border);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+}
+
+.backdrop-blur-3xl {
+  backdrop-filter: blur(64px);
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-bob {
+  animation: bob 8s infinite ease-in-out;
+}
+
+.animate-bob-slow {
+  animation: bob 12s infinite ease-in-out;
+}
+
+.animate-bob-reverse {
+  animation: bob 10s infinite ease-in-out reverse;
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
+}
+
+/* Premium Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(112, 161, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(112, 161, 255, 0.5);
+}
+
+/* Section Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Z-Space Shadow System */
+.z-space-card {
+  --z-dist: 1; /* 0 at center, 1 at edges */
+  --z-opacity: calc(1 - var(--z-dist));
+  --z-scale: calc(1 - (var(--z-dist) * 0.05));
+  
+  position: relative;
+  transition: transform 0.1s linear;
+  transform: scale(var(--z-scale));
+  
+  box-shadow: 
+    0 0 calc(var(--z-opacity) * 40px) rgba(var(--z-glow-color), calc(var(--z-opacity) * 0.4)),
+    0 0 calc(var(--z-dist) * 60px) rgba(0, 0, 0, calc(var(--z-dist) * 0.8));
+}
+
+.z-space-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, transparent, rgba(var(--z-edge-color), calc(var(--z-dist) * 0.6)));
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
