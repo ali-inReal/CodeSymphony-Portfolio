@@ -19,10 +19,10 @@ const Contac: React.FC = () => {
 		setSending(true);
 		setError("");
 
-		// EmailJS config
-		const serviceID = "service_default"; // Replace with your EmailJS service ID
-		const templateID = "template_default"; // Replace with your EmailJS template ID
-		const userID = "user_default"; // Replace with your EmailJS user/public key
+		// EmailJS config (replace with your actual values)
+		const serviceID = "service_4dbje3m"; // Your EmailJS service ID
+		const templateID = "template_gt6a90g"; // Your EmailJS template ID
+		const userID = "0PrEJTu__O4b5ZTkA"; // Your EmailJS public key
 
 		const templateParams = {
 			from_name: form.name,
