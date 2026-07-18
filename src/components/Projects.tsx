@@ -1,98 +1,130 @@
 import React from 'react';
-import MagneticWrapper from './MagneticWrapper';
-import HUDTelemetry from './HUDTelemetry';
-import lightningOsLogo from '../assets/lightning-os-logo.png';
-import orderswala from '../assets/orderswala.jpeg';
-import leadaspect from '../assets/leadaspect.png';
+import SectionHeader from './SectionHeader';
+import lightningOsLogo from '../assets/lightning-os-logo.webp';
+import orderswala from '../assets/orderswala.webp';
+import leadaspect from '../assets/leadaspect.webp';
+import linky from '../assets/linky.webp';
+
 const projects = [
   {
-    title: "LightningOS ",
-    description: "LightningOS Fiber is a high-speed internet service provided by LightningOS  that utilizes fiber-optic technology to deliver symmetrical gigabit speeds for seamless streaming, gaming, and professional remote work.",
-    tags: ["REACT", "NODE.JS"],
+    title: "LightningOS",
+    category: "Fiber Internet Platform",
+    description: "A high-speed fiber internet service delivering symmetrical gigabit speeds for seamless streaming, gaming, and professional remote work.",
+    tags: ["React", "Node.js"],
     image: lightningOsLogo,
     link: "https://lightningos.world/"
   },
   {
     title: "OrdersWala",
-    description: "Orders Wala is a comprehensive business management platform designed to help retail, food, and e-commerce brands streamline their operations by providing integrated tools for order tracking, product management, and automated mobile app generation.",
-    tags: ["FLUTTER"],
+    category: "Business Management Suite",
+    description: "A comprehensive business management platform helping retail, food, and e-commerce brands streamline order tracking, product management, and automated mobile app generation.",
+    tags: ["Flutter"],
     image: orderswala,
     link: "https://orderswala.com/"
   },
   {
     title: "LeadAspect",
-    description: "LeadAspect is a cutting-edge lead generation platform that leverages advanced analytics and AI to identify and nurture high-value prospects, ultimately driving revenue growth for businesses.",
-    tags: ["REACT", "NODE.JS"],
+    category: "AI Lead Generation",
+    description: "A lead generation platform that leverages advanced analytics and AI to identify and nurture high-value prospects, driving revenue growth for businesses.",
+    tags: ["React", "Node.js"],
     image: leadaspect,
     link: "https://leadaspect.com/"
+  },
+  {
+    title: "Linky",
+    category: "Smart Link Management",
+    description: "A smart link platform with rule-based routing by country, device, and schedule, plus A/B split testing, custom domains, and detailed click analytics — all from one short link.",
+    tags: ["React", "Node.js"],
+    image: linky,
+    link: "https://customizedlink.com/"
   }
 ];
 
 const Projects: React.FC = () => {
   return (
-    <section id="portfolio" className="py-24 px-8 bg-charcoal">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-20 relative">
-          <div className="flex justify-center mb-6">
-            <HUDTelemetry label="MOVEMENTS" value="SYNCHRONIZED" />
-          </div>
-          <h2 className="text-5xl md:text-7xl font-heading font-extrabold text-white mb-6 tracking-tighter">
-            Featured Movements
-          </h2>
-          <p className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto font-light">
-            A selection of our most complex digital symphonies brought to life.
-          </p>
-        </div>
+    <section id="portfolio" className="relative py-16 md:py-20 px-6 bg-shade-a overflow-hidden">
+      <div className="glow-blob w-[500px] h-[500px] -left-64 top-1/4" />
+      <div className="glow-blob glow-blob-violet w-[420px] h-[420px] -right-52 bottom-16" />
+      <div className="relative max-w-6xl mx-auto">
+        <SectionHeader
+          eyebrow="Selected Work"
+          title="Projects we're proud of"
+          subtitle="Real products shipped for real clients, from fiber internet platforms to AI-driven lead generation."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <MagneticWrapper key={index} strength={20} proximity={120}>
+        <div className="flex flex-col gap-8 md:gap-10">
+          {projects.map((project, index) => {
+            const reversed = index % 2 === 1;
+            return (
               <a
+                key={project.title}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block z-space-card group relative bg-[#1a1a1a]/50 border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/5 backdrop-blur-3xl cursor-pointer no-underline"
+                className="group card card-hover block rounded-3xl overflow-hidden no-underline"
               >
-                {/* Image Container */}
-                <div className="h-64 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-                  />
-                </div>
+                <div className="grid lg:grid-cols-2">
+                  {/* Image */}
+                  <div className={`relative h-64 sm:h-72 lg:h-auto lg:min-h-[380px] overflow-hidden bg-ink/5 dark:bg-black/30 ${reversed ? 'lg:order-2' : ''}`}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                    <div className={`absolute inset-0 pointer-events-none bg-gradient-to-t from-charcoal/50 via-transparent to-transparent lg:bg-gradient-to-t ${reversed ? 'lg:bg-gradient-to-r' : 'lg:bg-gradient-to-l'} lg:from-transparent lg:via-transparent lg:to-charcoal/20`} />
+                    {/* Hairline seam between image and content on desktop */}
+                    <div className={`hidden lg:block absolute top-0 bottom-0 w-px bg-ink/10 ${reversed ? 'left-0' : 'right-0'}`} />
+                  </div>
 
-                {/* Content */}
-                <div className="p-8">
-                  <div className="flex flex-col h-full">
-                    <div className="mb-8">
-                      <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-accent transition-colors duration-500">
-                        {project.title}
-                      </h3>
-                      <p className="text-white/40 leading-relaxed text-sm md:text-base font-light">
-                        {project.description}
-                      </p>
-                    </div>
+                  {/* Content */}
+                  <div className={`relative flex flex-col justify-center p-8 sm:p-10 lg:p-14 ${reversed ? 'lg:order-1' : ''}`}>
+                    {/* Oversized index watermark */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-6 right-8 font-heading font-semibold text-7xl lg:text-8xl leading-none text-ink/[0.05] dark:text-ink/[0.06] select-none transition-colors duration-500 group-hover:text-accent/10"
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
 
-                    <div className="flex justify-end gap-2 mt-auto">
+                    <p className="text-accent text-xs font-semibold tracking-[0.22em] uppercase mb-4 flex items-center gap-2.5">
+                      <span className="w-6 h-px bg-accent/60" />
+                      {project.category}
+                    </p>
+
+                    <h3 className="font-heading text-3xl lg:text-4xl font-semibold tracking-tight text-ink mb-4 transition-colors duration-300 group-hover:text-accent">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-ink/65 dark:text-ink/50 leading-relaxed text-[15px] mb-8 max-w-md">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-2 mb-8">
                       {project.tags.map((tag) => (
-                        <span 
+                        <span
                           key={tag}
-                          className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[0.6rem] font-black tracking-widest text-white/40 uppercase transition-all duration-500 group-hover:bg-accent/10 group-hover:text-accent group-hover:border-accent/20"
+                          className="px-3 py-1 rounded-full bg-ink/[0.06] border border-ink/10 text-xs font-medium text-ink/70 dark:text-ink/60"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
+
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-ink/70 dark:text-ink/60 transition-colors duration-300 group-hover:text-accent">
+                      Visit live site
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-ink/15 transition-all duration-300 group-hover:border-accent/50 group-hover:bg-accent/10">
+                        <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H8m9 0v9" />
+                        </svg>
+                      </span>
+                    </span>
                   </div>
                 </div>
-
-                {/* Subtle Glow */}
-                <div className="absolute -inset-px bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               </a>
-            </MagneticWrapper>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
