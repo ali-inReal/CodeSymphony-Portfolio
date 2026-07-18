@@ -1,127 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap');
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme (default) */
 :root {
-  --accent-blue: #00E5FF;
-  --deep-charcoal: #121212;
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent: #0891b2;
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --ink: #0e1116;
+  color-scheme: light;
+}
+
+/* Dark theme */
+.dark {
+  --accent: #00E5FF;
+  --bg: #0a0a0b;
+  --surface: #131316;
+  --ink: #ffffff;
+  color-scheme: dark;
+}
+
+@theme {
+  --color-accent: var(--accent);
+  --color-charcoal: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
   --font-heading: "Outfit", sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  
-  /* Z-Space specific variables */
-  --z-glow-color: 0, 229, 255;
-  --z-edge-color: 18, 18, 18;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Keep section headings visible below the fixed navbar when anchor-scrolling */
+section {
+  scroll-margin-top: 88px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 body {
   margin: 0;
-  background-color: var(--deep-charcoal);
-  color: white;
+  background-color: var(--bg);
+  color: var(--ink);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@theme {
-  --color-accent: var(--accent-blue);
-  --color-charcoal: var(--deep-charcoal);
-  --color-glass-border: var(--glass-border);
-  --font-heading: var(--font-heading);
-  --font-mono: var(--font-mono);
+/* Premium card surface: gradient fill, hairline border, inner top highlight */
+.card {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+  border: 1px solid rgba(14, 17, 22, 0.1);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 8px 24px -12px rgba(15, 23, 42, 0.12);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.backdrop-blur-3xl {
-  backdrop-filter: blur(64px);
+.dark .card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 14px 40px -18px rgba(0, 0, 0, 0.6);
 }
 
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(8, 145, 178, 0.4);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 16px 36px -14px rgba(15, 23, 42, 0.18),
+    0 0 32px -10px rgba(8, 145, 178, 0.18);
 }
 
-.animate-bob {
-  animation: bob 8s infinite ease-in-out;
+.dark .card-hover:hover {
+  border-color: rgba(0, 229, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 50px -18px rgba(0, 0, 0, 0.7),
+    0 0 40px -12px rgba(0, 229, 255, 0.18);
 }
 
-.animate-bob-slow {
-  animation: bob 12s infinite ease-in-out;
+/* Gradient headline text */
+.text-gradient {
+  background: linear-gradient(180deg, #0e1116 30%, rgba(14, 17, 22, 0.75) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-.animate-bob-reverse {
-  animation: bob 10s infinite ease-in-out reverse;
+.dark .text-gradient {
+  background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.55) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@keyframes gradient-x {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.text-gradient-accent {
+  background: linear-gradient(120deg, #0891b2 0%, #0369a1 55%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-.animate-gradient-x {
-  background-size: 200% 200%;
-  animation: gradient-x 5s ease infinite;
+.dark .text-gradient-accent {
+  background: linear-gradient(120deg, #00e5ff 0%, #7dd3fc 55%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Premium Noise Overlay */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+/* Glowing hairline divider between sections */
+.hairline {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(14, 17, 22, 0.12) 30%, rgba(8, 145, 178, 0.35) 50%, rgba(14, 17, 22, 0.12) 70%, transparent 100%);
+}
+
+.dark .hairline {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.14) 30%, rgba(0, 229, 255, 0.35) 50%, rgba(255, 255, 255, 0.14) 70%, transparent 100%);
+}
+
+/* Subtle blueprint grid, faded at the edges */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(14, 17, 22, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 17, 22, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
+}
+
+.dark .bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Section background gradients.
+   Sections alternate a/b so the vertical shade flows continuously:
+   a ends on the tone b starts with, and vice versa. Each layer adds a
+   soft cyan or violet tint for color depth without stealing focus. */
+.bg-shade-a {
+  background:
+    radial-gradient(ellipse 75% 55% at 12% 0%, rgba(8, 145, 178, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 92% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, #eef1f6 55%, var(--surface) 100%);
+}
+
+.dark .bg-shade-a {
+  background:
+    radial-gradient(ellipse 75% 55% at 12% 0%, rgba(0, 229, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 92% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, #0e1016 55%, var(--surface) 100%);
+}
+
+.bg-shade-b {
+  background:
+    radial-gradient(ellipse 75% 55% at 88% 0%, rgba(8, 145, 178, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 8% 100%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, var(--surface) 0%, #eef1f6 50%, var(--bg) 100%);
+}
+
+.dark .bg-shade-b {
+  background:
+    radial-gradient(ellipse 75% 55% at 88% 0%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 8% 100%, rgba(59, 130, 246, 0.07) 0%, transparent 60%),
+    linear-gradient(180deg, var(--surface) 0%, #0d0f14 50%, var(--bg) 100%);
+}
+
+/* Hero color wash layered over the base image */
+.bg-hero-shade {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(8, 145, 178, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(139, 92, 246, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+}
+
+.dark .bg-hero-shade {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(0, 229, 255, 0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(139, 92, 246, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+}
+
+/* Footer fades from the page background into a deeper tone */
+.bg-footer-shade {
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 100%, rgba(8, 145, 178, 0.05) 0%, transparent 65%),
+    linear-gradient(180deg, var(--bg) 0%, #e8ecf2 100%);
+}
+
+.dark .bg-footer-shade {
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 100%, rgba(0, 229, 255, 0.05) 0%, transparent 65%),
+    linear-gradient(180deg, var(--bg) 0%, #060607 100%);
+}
+
+/* Ambient accent glow blob */
+.glow-blob {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(8, 145, 178, 0.1) 0%, transparent 65%);
+  filter: blur(48px);
   pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  /* Promote to its own compositor layer so the blur isn't re-rasterized on scroll */
+  transform: translateZ(0);
 }
 
-/* Smooth Scrollbar */
+.dark .glow-blob {
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.14) 0%, transparent 65%);
+}
+
+.glow-blob-violet {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.09) 0%, transparent 65%);
+}
+
+.dark .glow-blob-violet {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 65%);
+}
+
+/* Soft pulsing dot for status badges */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 50%, transparent); }
+  50% { box-shadow: 0 0 0 5px transparent; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(112, 161, 255, 0.2);
-  border-radius: 10px;
+  background: rgba(14, 17, 22, 0.18);
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(112, 161, 255, 0.5);
+  background: rgba(14, 17, 22, 0.32);
 }
 
-/* Section Reveal Animation */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Section reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+  /* Release the compositing hint once the animation is done */
+  will-change: auto;
 }
 
-/* Z-Space Shadow System */
-.z-space-card {
-  --z-dist: 1; /* 0 at center, 1 at edges */
-  --z-opacity: calc(1 - var(--z-dist));
-  --z-scale: calc(1 - (var(--z-dist) * 0.05));
-  
-  position: relative;
-  transition: transform 0.1s linear;
-  transform: scale(var(--z-scale));
-  
-  box-shadow: 
-    0 0 calc(var(--z-opacity) * 40px) rgba(var(--z-glow-color), calc(var(--z-opacity) * 0.4)),
-    0 0 calc(var(--z-dist) * 60px) rgba(0, 0, 0, calc(var(--z-dist) * 0.8));
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-.z-space-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at center, transparent, rgba(var(--z-edge-color), calc(var(--z-dist) * 0.6)));
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

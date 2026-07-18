@@ -1,279 +1,104 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-const LightningCanvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+const companyLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Work', href: '#portfolio' },
+  { label: 'Process', href: '#process' },
+  // { label: 'Team', href: '#team' },
+  { label: 'Careers', href: '#careers' },
+  { label: 'Contact', href: '#contact' },
+];
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+const serviceLinks = [
+  'Custom Software Development',
+  'Mobile App Development',
+  'Cloud Solutions',
+  'Digital Transformation',
+];
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    interface Bolt {
-      x: number;
-      segments: { x: number; y: number }[];
-      alpha: number;
-      life: number;
-      maxLife: number;
-      branches: { segments: { x: number; y: number }[]; alpha: number }[];
-    }
-
-    const bolts: Bolt[] = [];
-
-    const createBolt = (): Bolt => {
-      const startX = Math.random() * canvas.width;
-      const segments: { x: number; y: number }[] = [];
-      let x = startX;
-      let y = 0;
-      const maxLife = 20 + Math.random() * 30;
-
-      while (y < canvas.height * 0.85) {
-        segments.push({ x, y });
-        x += (Math.random() - 0.5) * 40;
-        y += 8 + Math.random() * 12;
-      }
-      segments.push({ x, y: canvas.height * 0.92 });
-
-      // Generate branches
-      const branches: { segments: { x: number; y: number }[]; alpha: number }[] = [];
-      const branchCount = Math.floor(Math.random() * 3) + 1;
-      for (let b = 0; b < branchCount; b++) {
-        const branchStart = Math.floor(Math.random() * (segments.length - 4)) + 2;
-        const bSegs: { x: number; y: number }[] = [];
-        let bx = segments[branchStart].x;
-        let by = segments[branchStart].y;
-        const dir = Math.random() > 0.5 ? 1 : -1;
-        for (let i = 0; i < 6 + Math.floor(Math.random() * 6); i++) {
-          bSegs.push({ x: bx, y: by });
-          bx += dir * (10 + Math.random() * 20);
-          by += 6 + Math.random() * 10;
-          if (by > canvas.height * 0.85) break;
-        }
-        branches.push({ segments: bSegs, alpha: 0.4 + Math.random() * 0.4 });
-      }
-
-      return { x: startX, segments, alpha: 1, life: 0, maxLife, branches };
-    };
-
-    // Seed initial bolts
-    for (let i = 0; i < 6; i++) {
-      const b = createBolt();
-      b.life = Math.random() * b.maxLife;
-      bolts.push(b);
-    }
-
-    let raf: number;
-    let frame = 0;
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Spawn new bolts periodically
-      if (frame % 18 === 0 && bolts.length < 12) {
-        bolts.push(createBolt());
-      }
-
-      for (let i = bolts.length - 1; i >= 0; i--) {
-        const bolt = bolts[i];
-        bolt.life++;
-        const progress = bolt.life / bolt.maxLife;
-        bolt.alpha = progress < 0.2
-          ? progress / 0.2
-          : progress > 0.7
-            ? 1 - (progress - 0.7) / 0.3
-            : 1;
-
-        const drawSegments = (segs: { x: number; y: number }[], alpha: number, width: number) => {
-          if (segs.length < 2) return;
-          // Outer glow
-          ctx.save();
-          ctx.globalAlpha = alpha * bolt.alpha * 0.3;
-          ctx.strokeStyle = '#00aaff';
-          ctx.lineWidth = width + 4;
-          ctx.shadowColor = '#00e5ff';
-          ctx.shadowBlur = 20;
-          ctx.beginPath();
-          ctx.moveTo(segs[0].x, segs[0].y);
-          for (let j = 1; j < segs.length; j++) ctx.lineTo(segs[j].x, segs[j].y);
-          ctx.stroke();
-          ctx.restore();
-
-          // Core bolt
-          ctx.save();
-          ctx.globalAlpha = alpha * bolt.alpha;
-          ctx.strokeStyle = '#c0f0ff';
-          ctx.lineWidth = width;
-          ctx.shadowColor = '#00e5ff';
-          ctx.shadowBlur = 28;
-          ctx.beginPath();
-          ctx.moveTo(segs[0].x, segs[0].y);
-          for (let j = 1; j < segs.length; j++) ctx.lineTo(segs[j].x, segs[j].y);
-          ctx.stroke();
-          ctx.restore();
-        };
-
-        drawSegments(bolt.segments, 1, 1.5);
-        bolt.branches.forEach(br => drawSegments(br.segments, br.alpha * 0.6, 0.8));
-
-        // Ground glow at bottom
-        const last = bolt.segments[bolt.segments.length - 1];
-        const grd = ctx.createRadialGradient(last.x, last.y, 0, last.x, last.y, 60);
-        grd.addColorStop(0, `rgba(0, 200, 255, ${bolt.alpha * 0.4})`);
-        grd.addColorStop(1, 'rgba(0, 200, 255, 0)');
-        ctx.save();
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(last.x, last.y, 60, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        if (bolt.life >= bolt.maxLife) {
-          bolts.splice(i, 1);
-        }
-      }
-
-      frame++;
-      raf = requestAnimationFrame(draw);
-    };
-
-    draw();
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-      }}
-    />
-  );
-};
-
-/* ─── Ground fog strip ─────────────────────────────────────────────── */
-const GroundFog: React.FC = () => (
-  <div
-    style={{
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: '40px',
-      background: 'linear-gradient(to top, rgba(0,180,255,0.12), transparent)',
-      pointerEvents: 'none',
-    }}
-  />
-);
-
-
-
-/* ─── Main Footer ──────────────────────────────────────────────────── */
 const Footer: React.FC = () => {
-  const [hovered, setHovered] = useState(false);
-
   return (
-    <footer
-      style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '110px',
-        background: 'linear-gradient(to bottom, #121212 0%, #0d0f11 40%, #090c0f 100%)',
-        overflow: 'hidden',
-        fontFamily: 'Inter, sans-serif',
-      }}
-    >
-      {/* ── Lightning canvas ── */}
-      <LightningCanvas />
-      <GroundFog />
+    <footer className="bg-footer-shade px-6 pb-8">
+      <div className="hairline max-w-6xl mx-auto" />
+      <div className="max-w-6xl mx-auto pt-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="w-2 h-2 bg-accent rounded-full" />
+              <span className="font-heading font-semibold text-base tracking-tight text-ink">
+                CodeSymphony
+              </span>
+            </div>
+            <p className="text-ink/65 dark:text-ink/50 text-sm leading-relaxed max-w-sm mb-6">
+              A modern software development agency turning complex code into beautiful
+              solutions. We partner with businesses to design, build, and scale products
+              that matter.
+            </p>
+            <div className="flex gap-3">
+              <a
+                href="https://wa.me/+923092693382"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-9 h-9 rounded-lg bg-ink/[0.06] flex items-center justify-center text-ink/70 dark:text-ink/60 hover:text-accent hover:bg-ink/[0.1] transition-colors duration-200"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/codesymphony-inc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-9 h-9 rounded-lg bg-ink/[0.06] flex items-center justify-center text-ink/70 dark:text-ink/60 hover:text-accent hover:bg-ink/[0.1] transition-colors duration-200"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+            </div>
+          </div>
 
-      {/* ── Top bar: logo + copyright ── */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 5,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '18px 28px 0 28px',
-        }}
-      >
-        {/* Logo */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            cursor: 'pointer',
-          }}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {/* Lightning bolt icon */}
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            style={{
-              filter: hovered
-                ? 'drop-shadow(0 0 8px #00e5ff)'
-                : 'drop-shadow(0 0 4px #0099cc)',
-              transition: 'filter 0.3s',
-            }}
-          >
-            <circle cx="12" cy="12" r="11" fill="#1a1a2e" stroke="rgba(0,229,255,0.3)" strokeWidth="1.5" />
-            <path
-              d="M13.5 3L7 13h5l-1.5 8L19 11h-5.5L13.5 3z"
-              fill="#00e5ff"
-              stroke="#00e5ff"
-              strokeWidth="0.5"
-            />
-          </svg>
-          <span
-            style={{
-              fontFamily: 'Outfit, sans-serif',
-              fontWeight: 700,
-              fontSize: '15px',
-              letterSpacing: '2px',
-              color: '#fff',
-              textTransform: 'uppercase',
-              textShadow: hovered ? '0 0 12px rgba(0,229,255,0.8)' : 'none',
-              transition: 'text-shadow 0.3s',
-            }}
-          >
-            Code Symphony
-          </span>
+          {/* Company */}
+          <div>
+            <h4 className="text-ink font-semibold text-sm uppercase tracking-wider mb-5">Company</h4>
+            <ul className="list-none p-0 m-0 flex flex-col gap-3">
+              {companyLinks.map(link => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-ink/65 dark:text-ink/50 text-sm hover:text-ink transition-colors duration-200 no-underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-ink font-semibold text-sm uppercase tracking-wider mb-5">Services</h4>
+            <ul className="list-none p-0 m-0 flex flex-col gap-3">
+              {serviceLinks.map(service => (
+                <li key={service}>
+                  <a href="#services" className="text-ink/65 dark:text-ink/50 text-sm hover:text-ink transition-colors duration-200 no-underline">
+                    {service}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Copyright */}
-        <p
-          style={{
-            color: 'rgba(255,255,255,0.55)',
-            fontSize: '13px',
-            margin: 0,
-            letterSpacing: '0.5px',
-          }}
-        >
-          Copyright {new Date().getFullYear()} Code Symphony, All Rights Reserved
-        </p>
+        <div className="pt-8 border-t border-ink/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-ink/55 dark:text-ink/40 text-sm m-0">
+            &copy; {new Date().getFullYear()} CodeSymphony. All rights reserved.
+          </p>
+          <p className="text-ink/45 dark:text-ink/30 text-sm m-0">
+            Orchestrating the future of software.
+          </p>
+        </div>
       </div>
-
-
     </footer>
   );
 };
