@@ -10,7 +10,7 @@ const projects = [
     title: "LightningOS",
     category: "Fiber Internet Platform",
     description: "A high-speed fiber internet service delivering symmetrical gigabit speeds for seamless streaming, gaming, and professional remote work.",
-    tags: ["React", "Node.js"],
+    tags: ["React", "DotNet"],
     image: lightningOsLogo,
     link: "https://lightningos.world/"
   },
@@ -18,7 +18,7 @@ const projects = [
     title: "OrdersWala",
     category: "Business Management Suite",
     description: "A comprehensive business management platform helping retail, food, and e-commerce brands streamline order tracking, product management, and automated mobile app generation.",
-    tags: ["Flutter"],
+    tags: ["React Native", "React.js", "DotNet"],
     image: orderswala,
     link: "https://orderswala.com/"
   },
@@ -26,7 +26,7 @@ const projects = [
     title: "LeadAspect",
     category: "AI Lead Generation",
     description: "A lead generation platform that leverages advanced analytics and AI to identify and nurture high-value prospects, driving revenue growth for businesses.",
-    tags: ["React", "Node.js"],
+    tags: ["React", "DotNet"],
     image: leadaspect,
     link: "https://leadaspect.com/"
   },
@@ -34,7 +34,7 @@ const projects = [
     title: "Linky",
     category: "Smart Link Management",
     description: "A smart link platform with rule-based routing by country, device, and schedule, plus A/B split testing, custom domains, and detailed click analytics — all from one short link.",
-    tags: ["React", "Node.js"],
+    tags: ["Next.Js", ],
     image: linky,
     link: "https://customizedlink.com/"
   }

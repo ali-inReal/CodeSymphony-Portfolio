@@ -3,12 +3,12 @@ import heroImage from '../assets/hero-bg.webp';
 import heroImageLight from '../assets/hero-bg-light.webp';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Work', href: '#portfolio' },
-  { label: 'Process', href: '#process' },
-  // { label: 'Team', href: '#team' },
-  { label: 'Careers', href: '#careers' },
+  { label: 'ABOUT', href: '#about' },
+  { label: 'SERVICES', href: '#services' },
+  { label: 'WORK', href: '#portfolio' },
+  { label: 'PROCESS', href: '#process' },
+   { label: 'TEAM11\fjmjf', href: '#team' },
+  { label: 'CAREERS', href: '#careers' },
 ];
 
 const stats = [
