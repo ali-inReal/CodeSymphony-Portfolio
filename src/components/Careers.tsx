@@ -68,19 +68,6 @@ const coreValues = [
   }
 ];
 
-const openPositions = [
-  { role: 'React.js Developer', type: 'Full-time', location: 'Remote' },
-  { role: 'Flutter Developer', type: 'Full-time', location: 'Remote' },
-  { role: 'Node.js Backend Engineer', type: 'Full-time', location: 'Remote' },
-  { role: 'UI/UX Designer', type: 'Full-time', location: 'Remote' },
-  { role: 'SQA Engineer', type: 'Full-time', location: 'Remote' }
-];
-
-const applyFor = (role: string) => {
-  window.dispatchEvent(new CustomEvent('apply-role', { detail: role }));
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-};
-
 const Careers: React.FC = () => {
   return (
     <section id="careers" className="relative py-16 md:py-20 px-6 bg-shade-a overflow-hidden">
@@ -110,7 +97,7 @@ const Careers: React.FC = () => {
         </div>
 
         {/* Core values */}
-        <div className="mb-16">
+        <div>
           <h3 className="text-ink font-heading font-semibold text-2xl tracking-tight text-center mb-8">
             Our core values
           </h3>
@@ -128,48 +115,6 @@ const Careers: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Open positions */}
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-ink font-heading font-semibold text-2xl tracking-tight text-center mb-8">
-            Open positions
-          </h3>
-          <div className="card rounded-2xl divide-y divide-ink/[0.06] overflow-hidden">
-            {openPositions.map((position) => (
-              <div
-                key={position.role}
-                className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-7 py-5 hover:bg-ink/[0.03] transition-colors duration-200"
-              >
-                <div>
-                  <h4 className="text-ink font-semibold text-base mb-1.5">{position.role}</h4>
-                  <div className="flex gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-ink/[0.07] text-xs text-ink/65 dark:text-ink/50">
-                      {position.type}
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-ink/[0.07] text-xs text-ink/65 dark:text-ink/50">
-                      {position.location}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  className="self-start sm:self-center px-5 py-2 rounded-lg border border-accent/40 text-accent text-sm font-semibold hover:bg-accent hover:text-white dark:hover:text-black transition-colors duration-200 cursor-pointer"
-                  onClick={() => applyFor(position.role)}
-                >
-                  Apply now
-                </button>
-              </div>
-            ))}
-          </div>
-          <p className="text-ink/55 dark:text-ink/40 text-sm text-center mt-6">
-            Don't see your role?{' '}
-            <button
-              className="text-accent hover:underline cursor-pointer bg-transparent border-0 p-0 text-sm font-medium"
-              onClick={() => applyFor('an open application')}
-            >
-              Send an open application
-            </button>
-          </p>
         </div>
       </div>
     </section>

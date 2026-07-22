@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import SectionHeader from './SectionHeader';
 
@@ -12,16 +12,6 @@ const inputClasses =
 const Contact: React.FC = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-
-  useEffect(() => {
-    const handleApply = (e: Event) => {
-      const role = (e as CustomEvent<string>).detail;
-      setForm(prev => ({ ...prev, message: `Hi, I'd like to apply for the ${role} position at CodeSymphony.` }));
-      setStatus('idle');
-    };
-    window.addEventListener('apply-role', handleApply);
-    return () => window.removeEventListener('apply-role', handleApply);
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
