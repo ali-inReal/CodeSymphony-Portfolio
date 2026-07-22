@@ -179,10 +179,6 @@ const Home: React.FC = () => {
         <main className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-32 pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
           {/* Left: copy */}
           <div className="flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-ink/10 bg-ink/[0.04] backdrop-blur-sm mb-8">
-             
-            </div>
-
             <h1 className="font-heading text-5xl md:text-6xl xl:text-7xl font-semibold tracking-tight leading-[1.05] mb-6">
               <span className="text-gradient">Turning complex code into</span>{' '}
               <span className="text-gradient-accent">beautiful solutions</span>
