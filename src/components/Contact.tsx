@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import SectionHeader from './SectionHeader';
 
-const SERVICE_ID = 'service_4dbje3m';
-const TEMPLATE_ID = 'template_gt6a90g';
-const PUBLIC_KEY = '0PrEJTu__O4b5ZTkA';
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? 'service_r1ht4zg';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? 'template_gt6a90g';
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? 'Eeoqi6sQtpFKEyIQj';
 
 const inputClasses =
   'w-full px-4 py-3 rounded-xl bg-white dark:bg-black/30 border border-ink/15 dark:border-ink/10 text-ink placeholder-ink/40 dark:placeholder-ink/30 text-sm outline-none shadow-[inset_0_1px_2px_rgba(15,23,42,0.04)] dark:shadow-none hover:border-ink/25 dark:hover:border-ink/10 focus:border-accent/60 focus:shadow-[0_0_0_3px_rgba(8,145,178,0.12)] dark:focus:shadow-[0_0_0_3px_rgba(0,229,255,0.1)] transition-all duration-200';
@@ -12,6 +12,7 @@ const inputClasses =
 const Contact: React.FC = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,12 +21,13 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
+    setErrorMessage('');
 
     const templateParams = {
       from_name: form.name,
       from_email: form.email,
       message: form.message,
-      to_email: 'alim07922@gmail.com'
+      to_email: 'hammad309344@gmail.com'
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
@@ -33,7 +35,9 @@ const Contact: React.FC = () => {
         setStatus('sent');
         setForm({ name: '', email: '', message: '' });
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('EmailJS send failed:', error);
+        setErrorMessage(error?.text || error?.message || 'Please check the EmailJS service, template, and public key.');
         setStatus('error');
       });
   };
@@ -140,7 +144,9 @@ const Contact: React.FC = () => {
                 </div>
 
                 {status === 'error' && (
-                  <p className="text-red-600 dark:text-red-400 text-sm">Failed to send message. Please try again later.</p>
+                  <p className="text-red-600 dark:text-red-400 text-sm">
+                    Failed to send message. {errorMessage || 'Please try again later.'}
+                  </p>
                 )}
 
                 <button
