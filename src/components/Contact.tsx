@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import SectionHeader from './SectionHeader';
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? 'service_r1ht4zg';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? 'template_gt6a90g';
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? 'Eeoqi6sQtpFKEyIQj';
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? 'service_tppjnpa';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? 'template_vlb870y';
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? 'XFjV8HbUzk4vxAIGD';
 
 const inputClasses =
   'w-full px-4 py-3 rounded-xl bg-white dark:bg-black/30 border border-ink/15 dark:border-ink/10 text-ink placeholder-ink/40 dark:placeholder-ink/30 text-sm outline-none shadow-[inset_0_1px_2px_rgba(15,23,42,0.04)] dark:shadow-none hover:border-ink/25 dark:hover:border-ink/10 focus:border-accent/60 focus:shadow-[0_0_0_3px_rgba(8,145,178,0.12)] dark:focus:shadow-[0_0_0_3px_rgba(0,229,255,0.1)] transition-all duration-200';
@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
       from_name: form.name,
       from_email: form.email,
       message: form.message,
-      to_email: 'hammad309344@gmail.com'
+      to_email: 'admin@codesymphony.tech'
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
